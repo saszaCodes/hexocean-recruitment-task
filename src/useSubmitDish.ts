@@ -17,8 +17,11 @@ export const useSubmitDish = () => {
   const response = useMutation<{ ok: boolean; body: SubmitResponse }>(
     async (data?: any) => {
       const res = await fetch(submitUrl, {
-        body: data,
-        method: "POST"
+        body: JSON.stringify(data),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
       });
 
       return { ok: res.ok, body: await res.json() };
