@@ -17,7 +17,7 @@ import {
 type FormFields = {
   name: string;
   preparation_time: string;
-  dish_type: "empty" | "pizza" | "soup" | "sandwich";
+  type: "empty" | "pizza" | "soup" | "sandwich";
   no_of_slices?: string;
   diameter?: number;
   spiciness_scale?: number;
@@ -37,7 +37,7 @@ export const Form = () => {
     "failure" | "success" | undefined
   >(undefined);
 
-  const dish_type = watch("dish_type");
+  const type = watch("type");
 
   const onSubmit = handleSubmit(
     (fields) => {
@@ -82,7 +82,7 @@ export const Form = () => {
       <FormError name="preparation_time" errors={errors} />
       <FormSelect
         defaultValue="empty"
-        {...register("dish_type", {
+        {...register("type", {
           required: true,
           validate: (value) => value !== "empty"
         })}
@@ -94,7 +94,7 @@ export const Form = () => {
         <FormOption value="soup">Soup</FormOption>
         <FormOption value="sandwich">Sandwich</FormOption>
       </FormSelect>
-      {dish_type === "pizza" && (
+      {type === "pizza" && (
         <>
           <FormInput
             type="text"
@@ -124,7 +124,7 @@ export const Form = () => {
           <FormError name="diameter" errors={errors} />
         </>
       )}
-      {dish_type === "soup" && (
+      {type === "soup" && (
         <>
           <FormInput
             type="text"
@@ -141,7 +141,7 @@ export const Form = () => {
           <FormError name="spiciness_scale" errors={errors} />
         </>
       )}
-      {dish_type === "sandwich" && (
+      {type === "sandwich" && (
         <>
           <FormInput
             type="text"
